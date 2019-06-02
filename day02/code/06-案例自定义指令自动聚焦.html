@@ -38,7 +38,7 @@
 <body>
 <div id="app">
     <div class="add">
-        编号:<input type="text" v-model="newId">
+        编号:<input type="text" v-model="newId" v-myfocus="newId">
         品牌名称:<input type="text" v-model="newName" @keyDown.enter="addData">
         <input type="button" value="添加" @click="addData">
     </div>
@@ -50,7 +50,7 @@
     <div>
         <table class="tb">
             <tr>
-                <th>编号</th>
+                <th  v-mycolor="color">编号</th>
                 <th>品牌名称</th>
                 <th>创立时间</th>
                 <th>操作</th>
@@ -60,7 +60,7 @@
                 <td>{{item.name}}</td>
                 <td>{{item.ctime}}</td>
                 <td>
-                    <button @click="delData(index)">删除</button>
+                    <button @click="delData(index)" v-mycolor="color">删除</button>
                 </td>
             </tr>
             <!-- <tr>
@@ -72,11 +72,41 @@
 </div>
 </body>
 <script>
+    // 我们创建一个v-myfocus指令，实现input框自动聚焦
+    // 利用Vue.directive()创建全局自定义指令，该方法有两个参数：一个自定义指令名称，一个是配置项(这里面主要包含一些和自定义指令执行相关的函数)
+    // 1. 自定义指令名称 不带v-， 建议全部小写
+    Vue.directive('myfocus',{
+        // bind表示这个自定义指令一绑定到dom上，就开始自动执行
+        bind(el,binding) {
+            console.log('bind');
+        },
+        // 表示dom插入到页面上的时候自动执行
+        // 这些函数都有两个参数，一个是el(使用自定义指令的元素), 一个是binding(记录自定义指令信息的对象)
+        inserted(el, binding) {
+            console.log('inserted');
+            console.log(el);
+            console.log(binding);
+            el.focus()
+        },
+        // 表示自定义指令后面的值更新的时候，自动执行
+        update() {
+            console.log('update');
+        }
+    })
+
+    //创建一个自定义指令v-mycolor设置字体颜色
+    Vue.directive('mycolor',{
+        inserted(el, binding) {
+            el.style.color=binding.value;
+        }
+    });
+
     let vm = new Vue({
         el: '#app',
         data: {
-            newId: '', // 获取编号框中的值
-            newName: '', // 获取品牌名称框中的值
+            newId: '123',
+            newName: '',
+            color:'red',
             list: [
                 {id: 33, name: 'LV', ctime: new Date()},
                 {id: 44, name: 'CC', ctime: new Date()},

@@ -7,11 +7,31 @@
 </head>
 <body>
 
-<div id="app"></div>
+<div id="app">
+    <h1>异步数据</h1>
+    <p v-if="isVisible">异步数据回来了，我就显示</p>
+    <p v-else>数据还没有回来</p>
+    <button @click="getData">点击显示</button>
+
+    <h1>v-else-if</h1>
+    <p v-if="age<18">青少年</p>
+    <p v-else-if="age>=18 && age<30">成年</p>
+    <p v-else-if="age>=30 && age<50">中年</p>
+</div>
 <script>
     var vm = new Vue({
         el: '#app',
-        data: {}
+        data: {
+            age: 25,
+            isVisible: false
+        },
+        methods: {
+            getData() {
+                setTimeout(() => {
+                    this.isVisible = true
+                }, 1000);
+            }
+        }
     })
 </script>
 </body>

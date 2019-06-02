@@ -38,7 +38,7 @@
 <body>
 <div id="app">
     <div class="add">
-        编号:<input type="text" v-model="newId">
+        编号:<input type="text" v-model="newId" ref="inputRef">
         品牌名称:<input type="text" v-model="newName" @keyDown.enter="addData">
         <input type="button" value="添加" @click="addData">
     </div>
@@ -75,14 +75,23 @@
     let vm = new Vue({
         el: '#app',
         data: {
-            newId: '', // 获取编号框中的值
-            newName: '', // 获取品牌名称框中的值
+            newId: '',
+            newName: '',
             list: [
                 {id: 33, name: 'LV', ctime: new Date()},
                 {id: 44, name: 'CC', ctime: new Date()},
                 {id: 55, name: 'NIKE', ctime: new Date()},
                 {id: 66, name: 'YSL', ctime: new Date()},
             ]
+        },
+        // 在vue中不推重操作dom，但是它提供了一个ref属性，阔以用来获取页面dom元素的引用
+        // 如果想要页面一加载就执行，我们把函数写到mounted这个函数中，理解成window.onload
+        mounted(){
+            //原生
+            // document.getElementById('myid').focus()
+            // 1.2 获取定义的ref可以通过this.$refs.ref的名字
+            console.log(this.$refs.inputRef);
+            this.$refs.inputRef.focus()
         },
         methods: {
             delData(idx) {

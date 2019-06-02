@@ -264,13 +264,14 @@ vue语法高亮和自动补全代码
     components（Vue中的组件）
 
   3、举例：
-    <input type="text" v-model="uname" />
-
-  new Vue({
-      data:{
-          uname:'' //这个属性值和input元素的值相互一一对应，二者任何一个的改变都会联动的改变对方
+  <input type="text" v-model="name">
+  <input type="text" :value="name">
+  var vm = new Vue({
+        el: '#app',
+        data: {
+            name: 'itcast'//这个属性值和input元素的值相互一一对应，二者任何一个的改变都会联动的改变对方
         }
-  })
+    })
   ```
 
 ### v-on
@@ -324,6 +325,10 @@ vue语法高亮和自动补全代码
   ```
 
 ### v-on按键修饰符
+
+
+
+<h3>v-on按键修饰符</h3>
 
   * 作用说明
 

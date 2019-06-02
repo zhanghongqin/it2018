@@ -7,11 +7,18 @@
 </head>
 <body>
 
-<div id="app"></div>
+<div id="app">
+    <!-- v-model指令用来实现双向数据绑定，这个指令只能给input/select/textarea这些标签使用（组件也可以使用） -->
+    <!-- 双向数据绑定就是：数据模型中的数据与视图中的数据同步变化 -->
+    <input type="text" v-model="name">
+    <input type="text" :value="name">
+</div>
 <script>
     var vm = new Vue({
         el: '#app',
-        data: {}
+        data: {
+            name: 'itcast'//这个属性值和input元素的值相互一一对应，二者任何一个的改变都会联动的改变对方
+        }
     })
 </script>
 </body>
