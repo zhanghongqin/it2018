@@ -7,11 +7,28 @@
 </head>
 <body>
 
-<div id="app"></div>
+<div id="app">
+    <p>{{user.name}}: {{user.age}}: {{user.sex}}</p>
+    <button @click="addSex">点击添加性别属性</button>
+</div>
 <script>
     var vm = new Vue({
         el: '#app',
-        data: {}
+        data: {
+            user:{
+                name: 'jack',
+                age: 18
+            }
+        },
+        methods:{
+            addSex(){
+                // 给对象添加属性，不能使用下面这种方式，因为这种添加的属性，不是响应式数据
+                // this.user.sex = 'male'
+                //用下面其中一个方法
+                // Vue.set(this.user, 'sex', 'male')
+                this.$set(this.user,'sex','female')
+            }
+        }
     })
 </script>
 </body>
