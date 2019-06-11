@@ -7,11 +7,28 @@
 </head>
 <body>
 
-<div id="app"></div>
+<div id="app">
+    <!-- 1.2 想要指定插入指定位置，就得指定一下插入到slot的名字，通过slot属性来指定, 这个slot的值必须和下面slot组件得name值对应上 -->
+    <index>
+        <!-- 1.2 给这里需要取出slot中属性值得标签（也就是p）定义一个属性：slot-scope，它的值是一个对象，这个对象中保存的有下面slot中所有得属性 -->
+        <p slot-scope="obj">{{obj.company}}版权所有{{obj.$index}}---->{{obj.title}}</p>
+    </index>
+</div>
 <script>
+    // 1.1 现在我的slot组件携带了它自己得属性，如果我外面直接，那会把这些属性全部干掉。我想把他们取出来怎么办？需要用到作用域插槽
+    Vue.component('index', {
+        template: `
+          <div>
+            index
+            <slot title="这是尾部" company="itcast" $index="111"></slot>
+          </div>
+        `
+    })
     var vm = new Vue({
         el: '#app',
-        data: {}
+        data: {
+
+        }
     })
 </script>
 </body>
