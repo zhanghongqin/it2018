@@ -1711,7 +1711,8 @@ new Vue({
     4. npm install webpack@3.11.0 -g
 
 ### 使用webpack
-
+#### 00-安装
+- 安装：npm i -D webpack webpack-cli
 #### 01-webpack-cli
 
 使用命令：`webpack 输入文件路径 打包后文件路径`将一个文件打包成另外一个文件
